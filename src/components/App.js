@@ -16,7 +16,8 @@ import {
   CustomInput,
   Pagination,
   PaginationItem,
-  PaginationLink
+  PaginationLink,
+  Table,
 } from "reactstrap";
 
 import {
@@ -28,388 +29,42 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this._onPressButton = this._onPressButton.bind(this);
+    this.state = {
+      sensorData: [{id:0,temp:0,humid:0,moist:0,dateInserted:''}]
+    };
   }
-
   handleChange(e) {
     console.log(e.target.value);
   }
   render() {
     return (
       <ContainerStyled>
-        <Form>
-          <FormGroup>
-            <Label for="exampleEmail">Plain Text (Static)</Label>
-            <Input plaintext>Some plain text/ static value</Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleEmail">Email</Label>
-            <Input
-              type="email"
-              name="email"
-              id="exampleEmail"
-              placeholder="with a placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleEmail">Big Email</Label>
-            <Input
-              placeholder="lg"
-              bsSize="lg"
-              type="email"
-              name="email"
-              id="exampleEmail"
-              placeholder="with a placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              placeholder="password placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleUrl">Url</Label>
-            <Input
-              type="url"
-              name="url"
-              id="exampleUrl"
-              placeholder="url placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleNumber">Number</Label>
-            <Input
-              type="number"
-              name="number"
-              id="exampleNumber"
-              placeholder="number placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleDatetime">Datetime</Label>
-            <Input
-              type="datetime"
-              name="datetime"
-              id="exampleDatetime"
-              placeholder="datetime placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleDate">Date</Label>
-            <Input
-              type="date"
-              name="date"
-              id="exampleDate"
-              placeholder="date placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleTime">Time</Label>
-            <Input
-              type="time"
-              name="time"
-              id="exampleTime"
-              placeholder="time placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleColor">Color</Label>
-            <Input
-              type="color"
-              name="color"
-              id="exampleColor"
-              placeholder="color placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSearch">Search</Label>
-            <Input
-              type="search"
-              name="search"
-              id="exampleSearch"
-              placeholder="search placeholder"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSelect">Select</Label>
-            <Input type="select" name="select" id="exampleSelect">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSelectMulti">Select Multiple</Label>
-            <Input
-              type="select"
-              name="selectMulti"
-              id="exampleSelectMulti"
-              multiple
-            >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleText">Text Area</Label>
-            <Input type="textarea" name="text" id="exampleText" />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleFile">File</Label>
-            <Input type="file" name="file" id="exampleFile" />
-            <FormText color="muted">
-              This is some placeholder block-level help text for the above
-              input. It's a bit lighter and easily wraps to a new line.
-            </FormText>
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
-              <Input type="radio" /> Option one is this and that—be sure to
-              include why it's great
-            </Label>
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
-              <Input type="checkbox" /> Check me out
-            </Label>
-          </FormGroup>
-        </Form>
-        <br />
-        <Form>
-          <FormGroup row>
-            <Label for="examplePassword">Invalid input</Label>
-            <Input onChange={this.handleChange} invalid />
-            <FormFeedback>Oh noes! that name is already taken</FormFeedback>
-            <FormText>Example help text that remains unchanged.</FormText>
-          </FormGroup>
-
-          <FormGroup row>
-            <Label for="exampleEmail" sm={2}>
-              Email
-            </Label>
-            <Col sm={10}>
-              <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="with a placeholder"
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="examplePassword" sm={2}>
-              Password
-            </Label>
-            <Col sm={10}>
-              <Input
-                type="password"
-                name="password"
-                id="examplePassword"
-                placeholder="password placeholder"
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="exampleSelect" sm={2}>
-              Select
-            </Label>
-            <Col sm={10}>
-              <Input type="select" name="select" id="exampleSelect" />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="exampleSelectMulti" sm={2}>
-              Select Multiple
-            </Label>
-            <Col sm={10}>
-              <Input
-                type="select"
-                name="selectMulti"
-                id="exampleSelectMulti"
-                multiple
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="exampleText" sm={2}>
-              Text Area
-            </Label>
-            <Col sm={10}>
-              <Input type="textarea" name="text" id="exampleText" />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="exampleFile" sm={2}>
-              File
-            </Label>
-            <Col sm={10}>
-              <Input type="file" name="file" id="exampleFile" />
-              <FormText color="muted">
-                This is some placeholder block-level help text for the above
-                input. It's a bit lighter and easily wraps to a new line.
-              </FormText>
-            </Col>
-          </FormGroup>
-          <FormGroup tag="fieldset" row>
-            <legend className="col-form-label col-sm-2">Radio Buttons</legend>
-            <Col sm={10}>
-              <FormGroup check>
-                <Label check>
-                  <Input type="radio" name="radio2" /> Option one is this and
-                  that—be sure to include why it's great
-                </Label>
-              </FormGroup>
-              <FormGroup check>
-                <Label check>
-                  <Input type="radio" name="radio2" /> Option two can be
-                  something else and selecting it will deselect option one
-                </Label>
-              </FormGroup>
-              <FormGroup check disabled>
-                <Label check>
-                  <Input type="radio" name="radio2" disabled /> Option three is
-                  disabled
-                </Label>
-              </FormGroup>
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="checkbox2" sm={2}>
-              Checkbox
-            </Label>
-            <Col sm={{ size: 10 }}>
-              <FormGroup check>
-                <Label check>
-                  <Input type="checkbox" id="checkbox2" /> Check me out
-                </Label>
-              </FormGroup>
-            </Col>
-          </FormGroup>
-          <FormGroup check row>
-            <Col sm={{ size: 10, offset: 2 }}>
-              <Button>Submit</Button>
-            </Col>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleCustomFileBrowser">File Browser</Label>
-            <CustomInput
-              type="file"
-              id="exampleCustomFileBrowser"
-              name="customFile"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleCheckbox">Checkboxes</Label>
-            <div>
-              <CustomInput
-                type="checkbox"
-                id="exampleCustomCheckbox"
-                label="Check this custom checkbox"
-              />
-              <CustomInput
-                type="checkbox"
-                id="exampleCustomCheckbox2"
-                label="Or this one"
-              />
-              <CustomInput
-                type="checkbox"
-                id="exampleCustomCheckbox3"
-                label="But not this disabled one"
-                disabled
-              />
-            </div>
-          </FormGroup>
-        </Form>
-        <Row>
-          <Col>.col</Col>
-          <Col>.col</Col>
-          <Col>.col</Col>
-          <Col>.col</Col>
-        </Row>
-        <Row>
-          <Col xs="6" sm="4">
-            .col-6 .col-sm-4
-          </Col>
-          <Col xs="6" sm="4">
-            .col-6 .col-sm-4
-          </Col>
-          <Col sm="4">.col-sm-4</Col>
-        </Row>
-        <Row>
-          <Col sm={{ size: 6, order: 2, offset: 1 }}>
-            .col-sm-6 .col-sm-order-2 .col-sm-offset-2
-          </Col>
-        </Row>
-        <Row>
-          <Col sm="12" md={{ size: 8, offset: 2 }}>
-            .col-sm-12 .col-md-6 .col-md-offset-3
-          </Col>
-        </Row>
-        <StyledButton block disabled active={true} color="primary">
-          Cliquez moi
-        </StyledButton>
-        <p>
-          Je suis un badge <Badge color="secondary">New</Badge>
-        </p>
-        <Button color="primary" outline>
-          Notifications <Badge color="secondary">4</Badge>
+        <Table>
+          <thead><tr><th>ID</th><th>Temperature</th><th>Humidity</th><th>Moisture</th><th>Date/Time</th></tr></thead>
+          <tbody>{this.state.sensorData.map(row => { return <tr><td>{row.id}</td><td>{row.temp}</td><td>{row.humid}</td><td>{row.moist}</td><td>{row.dateInserted}</td></tr> })}</tbody>
+        </Table>
+        <Button color="primary" outline onClick={this._onPressButton.bind(this)}>
+          Refresh
         </Button>
-        <Button outline color="primary">
-          primary
-        </Button>{" "}
-        <Button outline color="secondary">
-          secondary
-        </Button>{" "}
-        <Button outline color="success">
-          success
-        </Button>{" "}
-        <Button outline color="info">
-          info
-        </Button>{" "}
-        <Button outline color="warning">
-          warning
-        </Button>{" "}
-        <Button outline color="danger">
-          danger
-        </Button>
-        <StyledBreadcrumb primary>
-          <BreadcrumbItem active>Home</BreadcrumbItem>
-          <BreadcrumbItem>Contact</BreadcrumbItem>
-          <BreadcrumbItem>A props</BreadcrumbItem>
-        </StyledBreadcrumb>
-        <Pagination aria-label="Page navigation example">
-          <PaginationItem disabled>
-            <PaginationLink previous href="#" />
-          </PaginationItem>
-          <PaginationItem active>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">2</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">4</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">5</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink next href="#" />
-          </PaginationItem>
-        </Pagination>
       </ContainerStyled>
     );
+  }
+  _onPressButton() {
+    var data = [{"id":1,"temp":66.74,"humid":25.30,"hindex":64.30,"mraw":1024.00,"moist":3.08,"dateInserted":"2019-01-28T18:10:50.727"},{"id":2,"temp":64.40,"humid":30.10,"hindex":61.95,"mraw":1024.00,"moist":3.08,"dateInserted":"2019-01-28T21:43:29.263"},{"id":3,"temp":64.76,"humid":23.70,"hindex":62.05,"mraw":1024.00,"moist":3.08,"dateInserted":"2019-01-29T05:44:18.423"},{"id":4,"temp":65.84,"humid":19.60,"hindex":63.05,"mraw":1024.00,"moist":3.08,"dateInserted":"2019-01-29T22:15:42.08"},{"id":5,"temp":58.82,"humid":27.90,"hindex":55.71,"mraw":423.00,"moist":1.27,"dateInserted":"2019-01-29T22:25:51.66"},{"id":6,"temp":57.74,"humid":20.80,"hindex":54.19,"mraw":600.00,"moist":1.80,"dateInserted":"2019-01-30T05:31:51.077"},{"id":7,"temp":61.34,"humid":19.30,"hindex":58.08,"mraw":605.00,"moist":1.82,"dateInserted":"2019-01-30T11:53:38.7"},{"id":8,"temp":58.82,"humid":20.70,"hindex":55.37,"mraw":615.00,"moist":1.85,"dateInserted":"2019-01-30T14:18:45.623"}];
+    this.setState({
+      sensorData: data
+    });
+    // fetch('http://stepwithoutfeet.com/api/sensors')
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     this.setState({
+    //       sensorData: responseJson
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }
 }
 
