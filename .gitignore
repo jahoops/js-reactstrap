@@ -1,0 +1,73 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local environments, dependencies, and generated output
+.env
+.env.*
+!.env.example
+node_modules/
+bower_components/
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.vs/
+.vscode/
+.idea/
+bin/
+obj/
+dist/
+build/
+coverage/
+*.log
+*.tmp
+*.cache
+
+# Local data, trained models, archives, and credentials
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.npy
+*.npz
+*.zip
+*.7z
+*.rar
+*.tar
+*.tgz
+*.gz
+*.db
+*.sqlite*
+*.pem
+*.key
+*.p12
+*.pfx
+
